@@ -2,6 +2,8 @@
 #define SHADER_H
 
 #include <glad/glad.h>
+#include "dependencies/glm/gtc/matrix_transform.hpp"
+#include "dependencies/glm/gtc/type_ptr.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -92,7 +94,10 @@ public:
     {
         glUniform4f(glGetUniformLocation(ID, name.c_str()), value1, value2, value3, value4);
     }
-    
+    void set4Matrix(const std::string& name, glm::mat4 trans)
+    {
+        glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(trans));
+    }
 private:
     // utility function for checking shader compilation/linking errors.
     // ------------------------------------------------------------------------
