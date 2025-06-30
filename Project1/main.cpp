@@ -138,6 +138,15 @@ int main()
     ourShader.setInt("texture1", 0);
     ourShader.setInt("texture2", 1);
 
+
+    glm::mat4 view = glm::mat4(1.0f);
+    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    ourShader.set4Matrix("view", view);
+
+    glm::mat4 projection;
+    projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+    ourShader.set4Matrix("projection", projection);
+
     while (!glfwWindowShouldClose(window))
     {
         // input
@@ -148,16 +157,14 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
 
-        glm::mat4 trans = glm::mat4(1.0f);
-        trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
-        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-
-
-        ourShader.set4Matrix("transform", trans);
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(0.5f, -0.5f, 0.0f));
+        model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.0f, 0.0f, 0.0f));
 
         
         ourShader.use();
         ourShader.setFloat("mixValue", sin(glfwGetTime() * 10.0f));
+        ourShader.set4Matrix("model", model);
         
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture1);
