@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="lightVertexShader.glsl" />
+    <None Include="lightFragmentShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="VertexShader.glsl" />
